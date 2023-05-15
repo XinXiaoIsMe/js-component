@@ -1,6 +1,6 @@
 import Upload from '../../src/js/upload/index.js'
 
-new Upload({
+const upload = new Upload({
   el: '.js-upload',
   action: '',
   headers: {},

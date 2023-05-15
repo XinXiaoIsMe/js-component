@@ -6,7 +6,8 @@
   "scripts": {
     "build": "vite build",
     "test": "vite --config vite.test.js",
-    "lint": "eslint src/**/*.js __test__/**/*.js"
+    "lint": "eslint src/**/*.js __test__/**/*.js",
+    "lint:fix": "eslint src/**/*.js __test__/**/*.js --fix"
   },
   "keywords": [
     "javascript",

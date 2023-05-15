@@ -19,6 +19,7 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "@typescript-eslint/comma-dangle": "off"
+        "@typescript-eslint/comma-dangle": "off",
+        "no-prototype-builtins": "off"
     }
 }

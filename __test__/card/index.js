@@ -13,7 +13,7 @@ const card3 = new Card({
   el: '.js-card--hover',
   shadow: 'hover'
 })
-
+/* eslint-disable no-alert */
 card1.on('click', () => alert('我是card1'), true)
 card2.on('click', () => alert('我是card2'), true)
 card3.on('click', () => alert('我是card3'), true)
