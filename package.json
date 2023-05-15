@@ -1,0 +1,20 @@
+{
+  "name": "js-component",
+  "version": "1.0.0",
+  "description": "components developed using native javascript",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build",
+    "test": "vite --config vite.test.js"
+  },
+  "keywords": [
+    "javascript",
+    "component"
+  ],
+  "author": "ccattempt",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^4.3.5",
+    "vite-plugin-html": "^3.2.0"
+  }
+}
