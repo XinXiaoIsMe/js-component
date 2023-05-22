@@ -15,6 +15,9 @@ export default function http(options = {}) {
     onTimeout = function () { }
   } = options
 
+  // eslint-disable-next-line no-console
+  console.log(headers)
+
   let onResolve, onReject
   const res = new Promise((resolve, reject) => {
     onResolve = resolve
@@ -34,6 +37,15 @@ export default function http(options = {}) {
   xhr.send(data)
 
   return res
+}
+
+http.post = function (url, data, options) {
+  return http({
+    type: 'POST',
+    url,
+    data,
+    ...options
+  })
 }
 
 function getUrl(url, params) {

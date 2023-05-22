@@ -1,6 +1,7 @@
 import { getElement } from '../utils/dom.js'
 import useAwait from '../utils/useAwait.js'
 import JSEvent from '../event/index.js'
+
 import http from './http.js'
 
 export default class Upload extends JSEvent {
@@ -9,6 +10,7 @@ export default class Upload extends JSEvent {
 
     this.options = options
     this.fileList = []
+    this.name = options.name || 'file'
     this.el = getElement(options.el)
 
     if (!this.el)
@@ -45,7 +47,7 @@ export default class Upload extends JSEvent {
   }
 
   handleFileUpload(e) {
-    const { files } = e.target.files
+    const { files } = e.target
     this.files = files
     this.fileList.push(...files)
     this.emit('on-change', files, this.fileList)
@@ -64,16 +66,28 @@ export default class Upload extends JSEvent {
       return
     }
 
-    const formData = new FormData()
-    formData.append('file', this.files)
-    formData.append('data', JSON.stringify(data))
-
-    const [error, res] = await useAwait(http({
-      type: 'POST',
-      url: action,
-      data: formData,
-      headers
-    }))
+    const createFormDatas = (name, files, data) => {
+      const formDatas = []
+      files.forEach((file) => {
+        const formData = new FormData()
+        formData.append(name, file)
+        if (typeof data === 'object') {
+          for (const key in data) {
+            if (data.hasOwnProperty(key))
+              formData.append(key, data[key])
+          }
+        }
+        formDatas.push(formData)
+      })
+      return formDatas
+    }
+    const createRequests = (datas) => {
+      const requests = []
+      datas.forEach(data => requests.push(http.post(action, data, { headers })))
+      return Promise.all(requests)
+    }
+    const formDatas = createFormDatas(this.name, [...this.files], data)
+    const [error, res] = await useAwait(createRequests(formDatas))
 
     if (error)
       this.emit('on-error', error, this.files, this.fileList)

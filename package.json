@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vite build",
     "test": "vite --config vite.test.js",
+    "server": "nodemon __test__/upload/server",
     "lint": "eslint src/**/*.js __test__/**/*.js",
     "lint:fix": "eslint src/**/*.js __test__/**/*.js --fix"
   },
@@ -17,8 +18,12 @@
   "license": "MIT",
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.6",
+    "body-parser": "^1.20.2",
     "eslint": "^8.40.0",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
     "lint-staged": "^13.2.2",
+    "nodemon": "^2.0.22",
     "simple-git-hooks": "^2.8.1",
     "vite": "^4.3.5",
     "vite-plugin-eslint": "^1.8.1"
@@ -28,5 +33,8 @@
   },
   "lint-staged": {
     "*.js": "npm run lint"
+  },
+  "dependencies": {
+    "axios": "^1.4.0"
   }
 }
